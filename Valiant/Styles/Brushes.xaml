@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Colors/Dark.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush x:Key="AccentPrimaryBrush" Color="{DynamicResource AccentPrimaryColor}" />
+    <SolidColorBrush x:Key="AccentSecondaryBrush" Color="{DynamicResource AccentSecondaryColor}" />
+
+    <SolidColorBrush x:Key="ControlLightestBrush" Color="{DynamicResource ControlLightestColor}" />
+    <SolidColorBrush x:Key="ControlLighterBrush" Color="{DynamicResource ControlLighterColor}" />
+    <SolidColorBrush x:Key="ControlLightBrush" Color="{DynamicResource ControlLightColor}" />
+    <SolidColorBrush x:Key="ControlMediumBrush" Color="{DynamicResource ControlMediumColor}" />
+    <SolidColorBrush x:Key="ControlDarkBrush" Color="{DynamicResource ControlDarkColor}" />
+    <SolidColorBrush x:Key="ControlDarkerBrush" Color="{DynamicResource ControlDarkerColor}" />
+    <SolidColorBrush x:Key="ControlDarkestBrush" Color="{DynamicResource ControlDarkestColor}" />
+
+    <SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource BorderColor}" />
+    <SolidColorBrush x:Key="BorderLightBrush" Color="{DynamicResource BorderLightColor}" />
+    <SolidColorBrush x:Key="BorderLighterBrush" Color="{DynamicResource BorderLighterColor}" />
+
+    <SolidColorBrush x:Key="TextLighterBrush" Color="{DynamicResource TextLighterColor}" />
+    <SolidColorBrush x:Key="TextLightBrush" Color="{DynamicResource TextLightColor}" />
+    <SolidColorBrush x:Key="TextMediumBrush" Color="{DynamicResource TextMediumColor}" />
+    <SolidColorBrush x:Key="TextDarkBrush" Color="{DynamicResource TextDarkColor}" />
+    <SolidColorBrush x:Key="TextDarkerBrush" Color="{DynamicResource TextDarkerColor}" />
+</ResourceDictionary> 

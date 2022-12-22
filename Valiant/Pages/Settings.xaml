@@ -1,0 +1,174 @@
+﻿<Page x:Class="Valiant.Pages.Settings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Valiant.Pages"
+      xmlns:classes="clr-namespace:Valiant.Classes"
+      xmlns:properties="clr-namespace:Valiant.Properties"
+      xmlns:userControls="clr-namespace:Valiant.UserControls"
+      mc:Ignorable="d" d:DesignWidth="800"
+      Foreground="{DynamicResource TextMediumBrush}"
+      FontFamily="{DynamicResource Poppins}"
+      Style="{DynamicResource CustomPageStyle}"
+      x:Name="Main"
+      Title="Settings">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border
+            Grid.Row="0"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="0, 0, 0, 1"
+            Padding="8">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="AppearanceRadioButton" Width="28" Height="28" Content="brush" Margin="0, 0, 8, 0" Padding="0" Style="{DynamicResource NavigationRadioButtonStyle}" FontFamily="{DynamicResource FontAwesomeSolid}" Click="AppearanceRadioButton_OnClick" />
+                <RadioButton x:Name="ApiRadioButton" Width="28" Height="28" Content="wrench" Margin="0, 0, 8, 0" Padding="0" Style="{DynamicResource NavigationRadioButtonStyle}" FontFamily="{DynamicResource FontAwesomeSolid}" Click="ApiRadioButton_OnClick" />
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer x:Name="Viewer" Grid.Row="1" ScrollChanged="Viewer_OnScrollChanged">
+            <StackPanel Margin="8">
+                <StackPanel x:Name="AppearancePanel">
+                    <TextBlock Text="Appearance" FontSize="16" Margin="0, 8, 0, 0" />
+
+                    <userControls:SettingsItem
+                    Margin="0, 8, 0, 0"
+                    Title="Inspector"
+                    Description="Theming stuff" Height="72">
+                        <userControls:SettingsItem.Element>
+                            <CheckBox IsChecked="{Binding
+                            Source={x:Static properties:Settings.Default},
+                            Path=Inspector,
+                            Mode=TwoWay}" />
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+
+                    <userControls:SettingsItem
+                        Margin="0, 8, 0, 0"
+                        Title="Background blur"
+                        Description="Acrylic effect (Require restart)">
+                        <userControls:SettingsItem.Element>
+                            <CheckBox Click="BackgroundBlurCheckBox_OnClick" IsChecked="{Binding
+                            Source={x:Static properties:Settings.Default},
+                            Path=Blur,
+                            Mode=TwoWay}" />
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+
+                    <userControls:SettingsItem
+                    Margin="0, 8, 0, 0"
+                    Title="Opacity"
+                    Description="See throuuuuuuuugh">
+                        <userControls:SettingsItem.Element>
+                            <Slider Width="120" Minimum="0.01" Maximum="1" TickFrequency="0.1" Value="{Binding
+                            Source={x:Static properties:Settings.Default},
+                            Path=Opacity,
+                            Mode=TwoWay}" />
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+
+                    <userControls:SettingsItem
+                    Margin="0, 8, 0, 0"
+                    Title="Wallpaper"
+                    Description="Set your favorite waifu wallpaper here">
+                        <userControls:SettingsItem.Element>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Open" Click="WallpaperButton_OnClick" />
+                                <Button Margin="8, 0, 0, 0" Content="Clear" Click="ClearWallpaperButton_OnClick" />
+                            </StackPanel>
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+
+                    <userControls:SettingsItem
+                    Margin="0, 8, 0, 0"
+                    Title="Wallpaper opacity"
+                    Description="See through waifu">
+                        <userControls:SettingsItem.Element>
+                            <Slider Width="120" Minimum="0" Maximum="1" TickFrequency="0.1" Value="{Binding
+                            Source={x:Static properties:Settings.Default},
+                            Path=WallpaperOpacity,
+                            Mode=TwoWay}" />
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+                </StackPanel>
+
+                <StackPanel x:Name="ApiPanel">
+                    <TextBlock Text="Injections And Misc" FontSize="16" Margin="0, 8, 0, 0" />
+
+                    <userControls:SettingsItem
+                        Margin="0, 8, 0, 0"
+                        Title="Api"
+                        Description="Change the API (Require restart)">
+                        <userControls:SettingsItem.Element>
+                            <ComboBox
+                                Width="120"
+                                ItemsSource="{classes:EnumBindingSource classes:ExploitApiType}"
+                                SelectedItem="{Binding
+                                    Source={x:Static properties:Settings.Default},
+                                    Path=Api,
+                                    Mode=TwoWay}" />
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+
+                    <userControls:SettingsItem
+                        Margin="0, 8, 0, 0"
+                        Title="Injector"
+                        Description="Change the injector (Require restart)">
+                        <userControls:SettingsItem.Element>
+                            <ComboBox
+                                Width="120"
+                                ItemsSource="{classes:EnumBindingSource classes:InjectorType}"
+                                SelectedItem="{Binding
+                                    Source={x:Static properties:Settings.Default},
+                                    Path=Injector,
+                                    Mode=TwoWay}" />
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+
+                    <userControls:SettingsItem
+                        Margin="0, 8, 0, 0"
+                        Title="Auto attach"
+                        Description="In case if you're too lazy to actually click &quot;inject&quot;">
+                        <userControls:SettingsItem.Element>
+                            <CheckBox IsChecked="{Binding
+                            Source={x:Static properties:Settings.Default},
+                            Path=AutoAttach,
+                            Mode=TwoWay}" />
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+
+                    <userControls:SettingsItem
+                        Margin="0, 8, 0, 0"
+                        Title="Reinstall Roblox"
+                        Description="Tries to reinstall Roblox">
+                        <userControls:SettingsItem.Element>
+                            <Button IsEnabled="{Binding Path=IsNotReinstalling}" Content="Reinstall" Click="ReinstallButton_OnClick" />
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+
+                    <userControls:SettingsItem
+                        Margin="0, 8, 0, 0"
+                        Title="Kill Roblox"
+                        Description="Kill that evil Roblox!">
+                        <userControls:SettingsItem.Element>
+                            <Button Content="Kill Roblox" Click="KillRoblox_OnClick" />
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+
+                    <userControls:SettingsItem
+                        Margin="0, 8, 0, 0"
+                        Title="Fix Roblox"
+                        Description="Fix!!!!!!!!!">
+                        <userControls:SettingsItem.Element>
+                            <Button Content="Fix Roblox" Click="FixRoblox_OnClick" />
+                        </userControls:SettingsItem.Element>
+                    </userControls:SettingsItem>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

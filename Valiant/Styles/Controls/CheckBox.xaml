@@ -1,0 +1,71 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type CheckBox}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Border
+                        x:Name="border"
+                        Background="{DynamicResource ControlDarkerBrush}"
+                        BorderBrush="{DynamicResource BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="4">
+                        <Grid
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Width="16" Height="16">
+                            <Grid.Clip>
+                                <RectangleGeometry x:Name="geometry" Rect="0, 0, 16, 16" />
+                            </Grid.Clip>
+                            <TextBlock x:Name="enabled" Text="&#xe73e;" FontSize="16" Opacity="0" Foreground="{DynamicResource TextMediumBrush}" FontFamily="{DynamicResource SegoeFluentIcons}" />
+                            <TextBlock x:Name="indeterminate" Text="&#xe73c;" FontSize="16" Opacity="0" Foreground="{DynamicResource TextMediumBrush}" FontFamily="{DynamicResource SegoeFluentIcons}" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource BorderLightBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource AccentSecondaryBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="enabled" Property="Opacity" Value="1" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="indeterminate" Property="Opacity" Value="1" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource AccentSecondaryBrush}" />
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource AccentSecondaryBrush}" />
+
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <RectAnimation
+                                            Storyboard.TargetName="geometry"
+                                            Storyboard.TargetProperty="Rect"
+                                            Duration="0:0:0.3"
+                                            From="-16, 0, 16, 16"
+                                            To="0, 0, 16, 16">
+                                            <RectAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </RectAnimation.EasingFunction>
+                                        </RectAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
