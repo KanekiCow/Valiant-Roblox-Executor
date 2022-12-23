@@ -154,6 +154,9 @@ public partial class TabbedMonacoEditor : UserControl
         if (TabList.IsMouseCaptured)
             TabList.ReleaseMouseCapture();
     }
+
+    private void FrameworkElement_OnRequestBringIntoView(object sender, RequestBringIntoViewEventArgs e) =>
+        e.Handled = true;
 }
 
 [Serializable]

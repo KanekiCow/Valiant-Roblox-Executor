@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <ScrollViewer x:Name="TabScroll" Grid.Row="0" PreviewMouseWheel="TabScroll_OnPreviewMouseWheel" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" RequestBringIntoView="FrameworkElement_OnRequestBringIntoView">
                 <ListBox
                     x:Name="TabList"
                     MouseMove="TabList_OnMouseMove"
