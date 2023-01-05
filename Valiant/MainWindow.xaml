@@ -108,6 +108,23 @@
                         </EasingDoubleKeyFrame>
                     </DoubleAnimationUsingKeyFrames>
 
+                    <ObjectAnimationUsingKeyFrames
+                        Storyboard.TargetName="LoadingGrid"
+                        Storyboard.TargetProperty="Visibility">
+                        <ObjectAnimationUsingKeyFrames.KeyFrames>
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                            <DiscreteObjectKeyFrame KeyTime="0:0:2.5">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames.KeyFrames>
+                    </ObjectAnimationUsingKeyFrames>
+
                     <DoubleAnimationUsingKeyFrames
                         Storyboard.TargetName="MainGrid"
                         Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)">
@@ -193,7 +210,7 @@
                                 <TextBlock><Run Text="code" FontSize="16" FontFamily="{DynamicResource FontAwesomeSolid}" /><Run Text=" "/><Run Text=" Editor" /></TextBlock>
                             </userControls:PageRadioButton>
 
-                            <userControls:PageRadioButton Style="{DynamicResource NavigationRadioButtonStyle}" IsEnabled="{Binding CanUiBeUsed}" Checked="PageButton_OnChecked">
+                            <userControls:PageRadioButton x:Name="ScriptHubRadioButton" Style="{DynamicResource NavigationRadioButtonStyle}" IsEnabled="{Binding CanUiBeUsed}" Checked="PageButton_OnChecked">
                                 <userControls:PageRadioButton.Page>
                                     <pages:ScriptHub />
                                 </userControls:PageRadioButton.Page>

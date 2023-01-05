@@ -67,6 +67,6 @@
         </Border>
 
         <TreeView x:Name="Tree" Background="Transparent" BorderThickness="0, 8, 1, 0" BorderBrush="{DynamicResource ControlLightestBrush}" Grid.Column="0" Grid.Row="1" />
-        <userControls:TabbedMonacoEditor x:Name="Editor" Grid.Column="1" Grid.Row="1" Margin="4, 8, 0, 0" SnapsToDevicePixels="True" />
-        </Grid>
+        <userControls:TabbedMonacoEditor x:Name="Editor" Panel.ZIndex="10" Grid.Column="1" Grid.Row="1" Margin="4, 8, 0, 0" SnapsToDevicePixels="True" />
+    </Grid>
 </Page>

@@ -13,7 +13,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ScrollViewer x:Name="TabScroll" Grid.Row="0" PreviewMouseWheel="TabScroll_OnPreviewMouseWheel" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+        <ScrollViewer x:Name="TabScroll" Panel.ZIndex="99" Grid.Row="0" PreviewMouseWheel="TabScroll_OnPreviewMouseWheel" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
             <StackPanel Orientation="Horizontal" RequestBringIntoView="FrameworkElement_OnRequestBringIntoView">
                 <ListBox
                     x:Name="TabList"
@@ -50,6 +50,7 @@
 
                 <Button
                     x:Name="AddButton"
+                    Panel.ZIndex="99"
                     Padding="0"
                     Content="&#xe710;"
                     Width="24" Height="24"

@@ -70,24 +70,34 @@ public partial class ScriptHub : Page
     {
         IsLoaded = false;
 
-        var url = new UriBuilder("https://scriptblox.com/api/script/fetch");
+        try
+        {
+            var url = new UriBuilder("https://scriptblox.com/api/script/fetch");
 
-        var para = HttpUtility.ParseQueryString(url.Query);
-        para["page"] = page.ToString();
-        para["max"] = take.ToString();
+            var para = HttpUtility.ParseQueryString(url.Query);
+            para["page"] = page.ToString();
+            para["max"] = take.ToString();
 
-        if (!string.IsNullOrWhiteSpace(query))
-            para["q"] = query;
+            if (!string.IsNullOrWhiteSpace(query))
+                para["q"] = query;
 
-        url.Query = para.ToString();
-        
-        var str = await App.HttpClient.GetStringAsync(url.Uri);
-        var json = ScriptPage.Parse(str);
+            url.Query = para.ToString();
 
-        CurrentPage = json;
-        CurrentIndex = page;
+            var str = await App.HttpClient.GetStringAsync(url.Uri);
+            var json = ScriptPage.Parse(str);
 
-        ScriptList.ItemsSource = CurrentPage.Scripts;
+            CurrentPage = json;
+            CurrentIndex = page;
+
+            ScriptList.ItemsSource = CurrentPage.Scripts;
+        }
+
+        catch
+        {
+            ScriptList.ItemsSource = null;
+            MainWindow.Instance.ScriptHubRadioButton.IsEnabled = false;
+            MessageBox.Show("There seems to be a problem with our script cloud provider. ScriptHub is temporary disabled.");
+        }
 
         IsLoaded = true;
     }

@@ -50,6 +50,7 @@
         <Setter Property="Margin" Value="1, 0" />
         <Setter Property="Padding" Value="8"/>
         <Setter Property="Focusable" Value="True"/>
+        <Setter Property="Panel.ZIndex" Value="98" />
         <Setter Property="KeyboardNavigation.AcceptsReturn" Value="False"/>
         <Setter Property="KeyboardNavigation.DirectionalNavigation" Value="None"/>
         <Setter Property="KeyboardNavigation.ControlTabNavigation" Value="None"/>
