@@ -96,7 +96,7 @@ public partial class ScriptHub : Page
         {
             ScriptList.ItemsSource = null;
             MainWindow.Instance.ScriptHubRadioButton.IsEnabled = false;
-            MessageBox.Show("There seems to be a problem with our script cloud provider. ScriptHub is temporary disabled.");
+            MessageBox.Show("There seems to be a problem with our cloud provider. Script hub is temporary disabled.");
         }
 
         IsLoaded = true;

@@ -30,6 +30,8 @@ public partial class App : Application
 
     public App()
     {
+        ExceptionHandler.Start();
+
         Startup += App_Startup;
         Settings.Default.PropertyChanged += Settings_PropertyChanged;
 

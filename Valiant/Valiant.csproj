@@ -120,6 +120,7 @@
     <Compile Include="Classes\ExploitApi.cs" />
     <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\Injector.cs" />
+    <Compile Include="Classes\ExceptionHandler.cs" />
     <Compile Include="Classes\ScriptHub.cs" />
     <Compile Include="Classes\WindowBlur.cs" />
     <Compile Include="Pages\Code.xaml.cs">
