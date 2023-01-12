@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +21,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Serialization;
-using CefSharp;
+using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
 using Valiant.Properties;
 using Button = System.Windows.Controls.Button;
 using Path = System.IO.Path;
+using Color = System.Drawing.Color;
 
 namespace Valiant.UserControls;
 
@@ -73,7 +76,26 @@ public partial class TabbedMonacoEditor : UserControl
 
         _autosaveTimer.Start();
 
-        Editor.Address = $"file:///{Directory.GetCurrentDirectory()}/Monaco/rosploco.html";
+        Editor.DefaultBackgroundColor = Color.Transparent;
+        InitializeWebView();
+    }
+
+    public async void InitializeWebView()
+    {
+        await Editor.EnsureCoreWebView2Async();
+        Editor.CoreWebView2.DOMContentLoaded += Editor_OnCoreWebView2DOMContentLoaded;
+        Editor.CoreWebView2.WebMessageReceived += Editor_OnCoreWebView2WebMessageReceived;
+        Editor.CoreWebView2.NavigationCompleted += Editor_OnCoreWebView2OnNavigationCompleted;
+
+        Editor.Source = new Uri($"file:///{Directory.GetCurrentDirectory()}/Monaco/rosploco.html");
+    }
+
+    private void Editor_OnCoreWebView2OnNavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+    {
+        if (TabList.Items.Count > 0)
+            TabList.SelectedIndex = 0;
+
+        SetValue(IsLoadedProperty, true);
     }
 
     public void SetText(string text) =>
@@ -82,40 +104,51 @@ public partial class TabbedMonacoEditor : UserControl
     public string GetText() =>
         TabList.SelectedIndex >= 0 ? Items[TabList.SelectedIndex].Content : "";
 
-    private void Editor_OnJavascriptMessageReceived(object sender, JavascriptMessageReceivedEventArgs e) =>
+    private void Editor_OnCoreWebView2WebMessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs e) =>
         // Fuck you UI Thread
         Dispatcher.Invoke(() =>
         {
             if (TabList.SelectedIndex < 0) return;
-            Items[TabList.SelectedIndex].Content = e.Message.ToString();
+            Items[TabList.SelectedIndex].Content = e.TryGetWebMessageAsString();
         });
 
     private int _previousSelectedIndex;
     private void TabList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        if (Items.Count == 0)
+            Items.Add(new TabInfo());
+
         if (Items.Count > 0 & TabList.SelectedItem == null)
             TabList.SelectedIndex = _previousSelectedIndex - 1 >= 0 ? _previousSelectedIndex - 1 : 0;
 
         _previousSelectedIndex = TabList.SelectedIndex;
 
+        var item = Items[TabList.SelectedIndex];
+        var id = JsonConvert.SerializeObject(item.Id);
+        var content = JsonConvert.SerializeObject(item.Content);
+
+
         if (TabList.SelectedIndex >= 0)
-            Editor.ExecuteScriptAsync("setText", Items[TabList.SelectedIndex].Content);
+            Editor.ExecuteScriptAsync($@"
+                if (!window.monacoModels[{id}]) {{
+                    window.monacoModels[{id}] = monaco.editor.createModel({content}, ""lua"")
+                    window.monacoModels[{id}].onDidChangeContent(() => chrome.webview.postMessage(window.monacoModels[{id}].getValue()))
+                }}
+                
+                editor.setModel(window.monacoModels[{id}])
+            ");
     }
 
-    private void Editor_OnFrameLoadEnd(object sender, FrameLoadEndEventArgs e)
+    private void Editor_OnCoreWebView2DOMContentLoaded(object sender, CoreWebView2DOMContentLoadedEventArgs e)
     {
         Dispatcher.Invoke(async () =>
         {
-            await Editor.EvaluateScriptAsync(@"
-                editor
-                    .getModel()
-                    .onDidChangeContent(() => CefSharp.PostMessage(editor.getValue()));
-                ");
-
-            SetValue(IsLoadedProperty, true);
-
-            if (TabList.Items.Count > 0)
-                TabList.SelectedIndex = 0;
+            await Editor.ExecuteScriptAsync(@"
+                window.onload = () => {
+                    window.monacoModels = {};
+                    chrome.webview.addEventListener('message', (e) => setText(e.data));
+                };
+            ");
         });
     }
 
@@ -160,8 +193,36 @@ public partial class TabbedMonacoEditor : UserControl
 }
 
 [Serializable]
-public class TabInfo
+public class TabInfo : INotifyPropertyChanged
 {
-    public string Name { get; set; } = "New Tab";
-    public string Content { get; set; } = "-- Welcome to Valiant v2";
+    private string _name = "New Tab";
+    private string _content = "-- Welcome to Valiant v2";
+
+    public readonly string Id = Guid.NewGuid().ToString("D");
+
+    public string Name
+    {
+        get => _name;
+        set
+        {
+            _name = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string Content
+    {
+        get => _content;
+        set
+        {
+            _content = value;
+            OnPropertyChanged();
+        }
+    }
+
+    [field:NonSerialized]
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    private void OnPropertyChanged([CallerMemberName] string name = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

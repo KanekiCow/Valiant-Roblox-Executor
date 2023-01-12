@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:Valiant"
         xmlns:userControls="clr-namespace:Valiant.UserControls"
         xmlns:pages="clr-namespace:Valiant.Pages"
-        xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:properties="clr-namespace:Valiant.Properties"
         xmlns:wb="clr-namespace:Valiant.Classes"
         wb:WindowBlur.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=Blur, Mode=OneTime}"

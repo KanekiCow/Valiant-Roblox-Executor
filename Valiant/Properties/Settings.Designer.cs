@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Windows.Documents;
+using System.Collections.Generic;
+using System.Configuration;
+
 namespace Valiant.Properties {
     
     
@@ -22,7 +26,25 @@ namespace Valiant.Properties {
                 return defaultInstance;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SettingsSerializeAs(SettingsSerializeAs.Binary)]
+        [global::System.Configuration.DefaultSettingValueAttribute(null)]
+        public List<string> Favorites
+        {
+            get
+            {
+                if (this["Favorites"] == null)
+                    this["Favorites"] = new List<string>();
+                return (List<string>)this["Favorites"];
+            }
+            set
+            {
+                this["Favorites"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]

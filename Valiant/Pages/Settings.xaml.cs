@@ -117,18 +117,25 @@ namespace Valiant.Pages
             return rect.Contains(bounds.TopLeft) || rect.Contains(bounds.BottomRight);
         }
 
+        private static void ScrollToTop(UIElement element, ScrollViewer container)
+        {
+            var elementTransform = element.TransformToAncestor(container);
+            var rectangle = elementTransform.TransformBounds(new Rect(new Point(0, 0), element.RenderSize));
+            container.ScrollToVerticalOffset(rectangle.Top + container.VerticalOffset);
+        }
+
         private void Viewer_OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (IsUserVisible(AppearancePanel, Viewer))
                 AppearanceRadioButton.IsChecked = true;
-            else
+            if (IsUserVisible(ApiPanel, Viewer))
                 ApiRadioButton.IsChecked = true;
         }
 
         private void AppearanceRadioButton_OnClick(object sender, RoutedEventArgs e) =>
-            AppearancePanel.BringIntoView();
+            ScrollToTop(AppearanceLabel, Viewer);
 
         private void ApiRadioButton_OnClick(object sender, RoutedEventArgs e) =>
-            ApiPanel.BringIntoView();
+            ScrollToTop(ApiLabel, Viewer);
     }
 }

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Valiant.UserControls"
-             xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+             xmlns:wpf1="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              mc:Ignorable="d" SnapsToDevicePixels="True" UseLayoutRounding="True"
              d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignData}">
     <Grid>
@@ -37,8 +37,79 @@
                                     FontSize="12"
                                     VerticalAlignment="Center"
                                     Click="CloseButton_OnClick"
-                                    Style="{DynamicResource TransparentButton}"
-                                    FontFamily="{DynamicResource SegoeFluentIcons}" />
+                                    FontFamily="{DynamicResource SegoeFluentIcons}">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Foreground" Value="{DynamicResource TextDarkBrush}" />
+
+                                            <Setter Property="FontSize" Value="16" />
+
+                                            <Setter Property="Padding" Value="12, 6" />
+                                            <Setter Property="Margin" Value="4, 0" />
+
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Grid>
+                                                            <Border x:Name="bd" Background="{DynamicResource AccentPrimaryBrush}" Opacity="0" CornerRadius="12" />
+                                                            <ContentPresenter x:Name="presenter" Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Grid>
+
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Foreground" Value="{DynamicResource TextMediumBrush}" />
+
+                                                                <Trigger.EnterActions>
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation
+                                            Storyboard.TargetName="bd"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Duration="0:0:0.25"
+                                            To="0.1">
+                                                                                <DoubleAnimation.EasingFunction>
+                                                                                    <QuadraticEase EasingMode="EaseInOut" />
+                                                                                </DoubleAnimation.EasingFunction>
+                                                                            </DoubleAnimation>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </Trigger.EnterActions>
+
+                                                                <Trigger.ExitActions>
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation
+                                            Storyboard.TargetName="bd"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Duration="0:0:0.25"
+                                            To="0">
+                                                                                <DoubleAnimation.EasingFunction>
+                                                                                    <QuadraticEase EasingMode="EaseInOut" />
+                                                                                </DoubleAnimation.EasingFunction>
+                                                                            </DoubleAnimation>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </Trigger.ExitActions>
+                                                            </Trigger>
+                                                            <Trigger Property="IsPressed" Value="True">
+                                                                <Setter TargetName="presenter" Property="Effect">
+                                                                    <Setter.Value>
+                                                                        <DropShadowEffect Color="{DynamicResource AccentPrimaryColor}" Opacity="0.5" BlurRadius="5" ShadowDepth="0" Direction="0" />
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                                <Setter Property="Foreground" Value="{DynamicResource AccentPrimaryBrush}" />
+                                                            </Trigger>
+
+                                                            <DataTrigger Binding="{Binding ElementName=TabList, Path=Items.Count}" Value="1">
+                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                            </DataTrigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                                 <local:EditableTextBlock
                                     Text="{Binding Name, Mode=TwoWay}"
                                     VerticalAlignment="Center"
@@ -58,29 +129,27 @@
                     VerticalAlignment="Center"
                     IsEnabled="{Binding IsLoaded}"
                     Style="{DynamicResource TransparentButton}"
-                    FontFamily="{DynamicResource SegoeFluentIcons}" />
+                    FontFamily="{DynamicResource SegoeFluentIcons}">
+                </Button>
             </StackPanel>
         </ScrollViewer>
 
-        <wpf:ChromiumWebBrowser
+        <wpf1:WebView2
             x:Name="Editor"
             Grid.Row="1"
-            UseLayoutRounding="True"
             SnapsToDevicePixels="True"
             Margin="0, 8, 0, 0"
-            FrameLoadEnd="Editor_OnFrameLoadEnd"
-            RenderOptions.BitmapScalingMode="HighQuality"
-            JavascriptMessageReceived="Editor_OnJavascriptMessageReceived">
-            <wpf:ChromiumWebBrowser.Style>
-                <Style TargetType="{x:Type wpf:ChromiumWebBrowser}">
+            RenderOptions.BitmapScalingMode="HighQuality">
+            <wpf1:WebView2.Style>
+                <Style TargetType="{x:Type wpf1:WebView2}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding ElementName=TabList, Path=SelectedItem}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Hidden" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </wpf:ChromiumWebBrowser.Style>
-        </wpf:ChromiumWebBrowser>
+            </wpf1:WebView2.Style>
+        </wpf1:WebView2>
 
         <TextBlock 
             Grid.Row="1"

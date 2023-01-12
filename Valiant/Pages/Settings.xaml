@@ -33,7 +33,7 @@
         <ScrollViewer x:Name="Viewer" Grid.Row="1" ScrollChanged="Viewer_OnScrollChanged">
             <StackPanel Margin="8">
                 <StackPanel x:Name="AppearancePanel">
-                    <TextBlock Text="Appearance" FontSize="16" Margin="0, 8, 0, 0" />
+                    <TextBlock x:Name="AppearanceLabel" Text="Appearance" FontSize="16" Margin="0, 8, 0, 0" />
 
                     <userControls:SettingsItem
                     Margin="0, 8, 0, 0"
@@ -97,7 +97,7 @@
                 </StackPanel>
 
                 <StackPanel x:Name="ApiPanel">
-                    <TextBlock Text="Injections And Misc" FontSize="16" Margin="0, 8, 0, 0" />
+                    <TextBlock x:Name="ApiLabel" Text="Injections And Misc" FontSize="16" Margin="0, 8, 0, 0" />
 
                     <userControls:SettingsItem
                         Margin="0, 8, 0, 0"
@@ -105,7 +105,7 @@
                         Description="Change the API (Require restart)">
                         <userControls:SettingsItem.Element>
                             <ComboBox
-                                Width="120"
+                                Width="160" Height="32"
                                 ItemsSource="{classes:EnumBindingSource classes:ExploitApiType}"
                                 SelectedItem="{Binding
                                     Source={x:Static properties:Settings.Default},
@@ -120,7 +120,7 @@
                         Description="Change the injector (Require restart)">
                         <userControls:SettingsItem.Element>
                             <ComboBox
-                                Width="120"
+                                Width="160" Height="32"
                                 ItemsSource="{classes:EnumBindingSource classes:InjectorType}"
                                 SelectedItem="{Binding
                                     Source={x:Static properties:Settings.Default},
