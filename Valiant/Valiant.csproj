@@ -349,8 +349,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release ROBOCOPY "$(TargetDir) " "$(TargetDir)bin\ " /XF $(TargetFileName) *.config *.manifest /XD Monaco scripts theme bin logs data /E /IS /MOVE
-xcopy "$(ProjectDir)Assets\Export\" "$(TargetDir)" /e /d /y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)Assets\Export\" "$(TargetDir)" /e /d /y</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

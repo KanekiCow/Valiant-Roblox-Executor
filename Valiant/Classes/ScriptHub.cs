@@ -10,16 +10,6 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
 namespace Valiant.Classes;
-
-[JsonConverter(typeof(StringEnumConverter))]
-public enum ScriptType
-{
-    [EnumMember(Value = "free")]
-    Free,
-    [EnumMember(Value = "paid")]
-    Paid,
-}
-
 public class ScriptPage
 {
     [JsonProperty("totalPages")]
@@ -90,7 +80,7 @@ public class Script : BaseObject
     public int Views { get; set; }
 
     [JsonProperty("scriptType")]
-    public ScriptType Type { get; set; }
+    public string Type { get; set; } // returns either "paid" or "free"
 
     [JsonProperty("isPatched")]
     public bool IsPatched { get; set; }
