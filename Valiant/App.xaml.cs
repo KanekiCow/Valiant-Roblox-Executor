@@ -6,6 +6,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Policy;
 using System.Threading.Tasks;
@@ -33,6 +34,9 @@ public partial class App : Application
 #if !DEBUG
     ExceptionHandler.Start();
 #endif
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        ServicePointManager.Expect100Continue = true;
+
         Startup += App_Startup;
         Settings.Default.PropertyChanged += Settings_PropertyChanged;
 
