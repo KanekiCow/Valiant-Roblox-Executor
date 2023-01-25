@@ -35,7 +35,6 @@ public partial class App : Application
     ExceptionHandler.Start();
 #endif
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-        ServicePointManager.Expect100Continue = true;
 
         Startup += App_Startup;
         Settings.Default.PropertyChanged += Settings_PropertyChanged;
