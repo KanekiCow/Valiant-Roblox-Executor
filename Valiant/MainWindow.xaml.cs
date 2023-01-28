@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using Microsoft.Web.WebView2.Core;
 using Microsoft.Win32;
 using Valiant.Classes;
 using Valiant.Pages;
@@ -72,6 +73,54 @@ public partial class MainWindow : Window
         // Disable navigation
         NavigationCommands.BrowseBack.InputGestures.Clear();
         NavigationCommands.BrowseForward.InputGestures.Clear();
+    }
+
+    public static bool IsWebView2Installed() =>
+        CoreWebView2Environment.GetAvailableBrowserVersionString() != null;
+
+    public async Task<bool> CheckDependencies()
+    {
+        UpdateStatus(
+            "Checking for WebView2 availability",
+            0,
+            Visibility.Visible,
+            Visibility.Visible);
+
+        if (IsWebView2Installed()) return true;
+
+        UpdateStatus(
+            "Downloading WebView2",
+            33,
+            Visibility.Visible,
+            Visibility.Visible);
+
+        var webView2 = Path.Combine(Path.GetTempPath(), "webview.exe");
+        await App.HttpClient.GetFileAsync("https://go.microsoft.com/fwlink/p/?LinkId=2124703", webView2);
+
+        UpdateStatus(
+            "Installing WebView2",
+            66,
+            Visibility.Visible,
+            Visibility.Visible);
+
+        var proc = new Process
+        {
+            StartInfo =
+            {
+                FileName = webView2,
+                Arguments = "/silent /install",
+                UseShellExecute = false
+            }
+        };
+
+        proc.Start();
+
+        await proc.WaitForExitAsync();
+
+        MessageBox.Show("WebView2 has been installed! Click \"ok\" to restart Valiant", "WebView2", MessageBoxButton.OK, MessageBoxImage.Information);
+
+        return false;
+
     }
 
     public void Api_OnInitProgressChanged(object sender, InitProgressEventArg e)

@@ -56,6 +56,9 @@ public partial class TabbedMonacoEditor : UserControl
     {
         InitializeComponent();
 
+        if (!MainWindow.IsWebView2Installed())
+            return;
+
         try
         {
             using var fs = new FileStream(Path.GetFullPath("tabs.bin"), FileMode.Open, FileAccess.ReadWrite);

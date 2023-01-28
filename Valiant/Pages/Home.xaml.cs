@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,8 +61,18 @@ public partial class Home : Page
             if (content.Trim() == key.Trim())
             {
                 Properties.Settings.Default.Key = key;
+                
+                var dependenciesInstalled = await MainWindow.Instance.CheckDependencies();
+
+                if (!dependenciesInstalled)
+                {
+                    Process.Start(Assembly.GetExecutingAssembly().Location);
+                    Application.Current.Shutdown();
+                }
+
                 await MainWindow.Instance.Api.Initialize();
                 MainWindow.Instance.CodeRadioButton.IsChecked = true;
+
                 return;
             }
 
