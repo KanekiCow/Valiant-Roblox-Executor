@@ -268,7 +268,7 @@
 
                 <Frame x:Name="PageFrame" Grid.Row="1" NavigationUIVisibility="Hidden" SnapsToDevicePixels="True" />
 
-                <ItemsControl Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" ItemsSource="{Binding Notifications}">
+                <ItemsControl Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="250" ItemsSource="{Binding Notifications}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel />
