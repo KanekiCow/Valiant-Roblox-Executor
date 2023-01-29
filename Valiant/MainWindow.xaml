@@ -267,6 +267,35 @@
                 </Border>
 
                 <Frame x:Name="PageFrame" Grid.Row="1" NavigationUIVisibility="Hidden" SnapsToDevicePixels="True" />
+
+                <ItemsControl Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" ItemsSource="{Binding Notifications}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local:Notification}">
+                            <Border Background="{DynamicResource ControlDarkBrush}" CornerRadius="8" Margin="16" Padding="16">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Grid.Column="1" Grid.Row="0" Content="&#xe8bb;" FontFamily="{DynamicResource SegoeFluentIcons}" Padding="0" FontSize="8" Height="12" Width="12" Click="NotificationButton_OnClick" />
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title}" FontSize="12" FontWeight="Medium" />
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Description}" FontSize="10" Margin="0 4 0 0" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </Grid>
 
             <Grid x:Name="LoadingGrid" HorizontalAlignment="Center" VerticalAlignment="Top" Opacity="0" RenderTransformOrigin="0.5, 0.5" Margin="0,92,0,0" Grid.Row="2">

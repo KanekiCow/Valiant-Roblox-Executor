@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,12 @@ using Settings = Valiant.Properties.Settings;
 
 namespace Valiant;
 
+public class Notification
+{
+    public string Title { get; set; }
+    public string Description { get; set; }
+}
+
 /// <summary>
 /// Interaction logic for MainWindow.xaml   
 /// </summary>
@@ -47,6 +54,8 @@ public partial class MainWindow : Window
 
     public ExploitApi Api;
 
+    public ObservableCollection<Notification> Notifications { get; }
+
     public static MainWindow Instance { get; }
 
     private readonly DispatcherTimer _autoAttachTimer = new() { Interval = TimeSpan.FromSeconds(1) };
@@ -61,6 +70,8 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = this;
 
+        Notifications = new ObservableCollection<Notification>();
+
         // Initialize API
         Directory.CreateDirectory(App.ModuleDirectory);
 
@@ -74,6 +85,9 @@ public partial class MainWindow : Window
         NavigationCommands.BrowseBack.InputGestures.Clear();
         NavigationCommands.BrowseForward.InputGestures.Clear();
     }
+
+    public void CreateNotification(Notification notification) =>
+        Notifications.Add(notification);
 
     public static bool IsWebView2Installed() =>
         CoreWebView2Environment.GetAvailableBrowserVersionString() != null;
@@ -155,6 +169,12 @@ public partial class MainWindow : Window
                     progress: 0,
                     spinnerVisibility: Visibility.Hidden,
                     progressVisibility: Visibility.Hidden);
+
+                CreateNotification(new Notification
+                {
+                    Title = "Loaded!",
+                    Description = "Valiant is loaded!"
+                });
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -295,5 +315,11 @@ public partial class MainWindow : Window
         }
 
         HomePageButton.IsChecked = true;
+    }
+
+    private void NotificationButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var data = (Notification)((Button)sender).DataContext;
+        Notifications.Remove(data);
     }
 }

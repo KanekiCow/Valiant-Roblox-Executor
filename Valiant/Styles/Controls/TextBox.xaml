@@ -29,7 +29,37 @@
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
                             <Setter Property="Background" TargetName="border" Value="{DynamicResource ControlDarkestBrush}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource AccentPrimaryBrush}"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="border"
+                                            Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                            Duration="0:0:0.25"
+                                            To="{StaticResource AccentPrimaryColor}">
+                                            <ColorAnimation.EasingFunction>
+                                                <QuadraticEase EasingMode="EaseInOut" />
+                                            </ColorAnimation.EasingFunction>
+                                        </ColorAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="border"
+                                            Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                            Duration="0:0:0.25"
+                                            To="{StaticResource BorderColor}">
+                                            <ColorAnimation.EasingFunction>
+                                                <QuadraticEase EasingMode="EaseInOut" />
+                                            </ColorAnimation.EasingFunction>
+                                        </ColorAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
