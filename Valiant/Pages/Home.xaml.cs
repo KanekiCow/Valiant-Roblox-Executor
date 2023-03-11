@@ -54,6 +54,7 @@ public partial class Home : Page
                 "Invalid key",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
+
         else
         {
             var content = await App.HttpClient.GetStringAsync("https://raw.githubusercontent.com/KanekiCat/shit/main/sex");
