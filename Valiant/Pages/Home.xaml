@@ -1,4 +1,4 @@
-﻿<Page x:Class="Valiant.Pages.Home"
+<Page x:Class="Valiant.Pages.Home"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,8 +11,8 @@
       Style="{DynamicResource CustomPageStyle}"
       Title="Home" Foreground="{DynamicResource TextDarkBrush}">
     <Grid>
-        <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="key" HorizontalAlignment="Center" Margin="64" FontSize="64" FontFamily="{DynamicResource FontAwesomeSolid}" RenderTransformOrigin="0.531,1.242" >
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="key" FontSize="100" FontFamily="{DynamicResource FontAwesomeSolid}" RenderTransformOrigin="0.531,1.242" Height="104" Width="100" >
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1"/>
@@ -22,30 +22,18 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock HorizontalAlignment="Center" FontSize="20" Foreground="#3FFFFFFF"  FontFamily="{DynamicResource Poppins}">
-                <Run Text="Oh hi there, please enter your key to use Valiant" />
-
-            </TextBlock>
-            <TextBlock HorizontalAlignment="Center" FontSize="15" Foreground="#3FD0D0D0" Height="19"  FontFamily="{DynamicResource Poppins}">
-                <Run Text="Needs a key? Join our Discord sever below!" />
-               
-            </TextBlock>
+            <TextBlock x:Name="aaaa" HorizontalAlignment="Center" FontSize="20" Foreground="#3FFFFFFF"  FontFamily="{DynamicResource Poppins}" Loaded="TextBlock_Loaded"><Run Text="Hello, please enter key to use Valiant." /></TextBlock>
+            <TextBlock HorizontalAlignment="Center" FontSize="15" Foreground="#3FD0D0D0" Height="19"  FontFamily="{DynamicResource Poppins}"><Run Text="Need key? Join our Discord sever below!" /></TextBlock>
             <TextBox x:Name="KeyTextBox" Margin="0, 8, 0, 0" IsEnabled="{Binding IsNotValidating}" Width="468" />
             <DockPanel Margin="0, 8, 0, 0" HorizontalAlignment="Stretch">
                 <Button x:Name="KeyButton" DockPanel.Dock="Left" IsEnabled="{Binding IsNotValidating}" Click="KeyButton_Click" Width="138" >
-                    <TextBlock  FontFamily="{DynamicResource Poppins}">
-                     <Run Text="Enter"/>
-                            <Run Text="" FontFamily="{DynamicResource FontAwesomeSolid}" />
-                    </TextBlock>
+                    <TextBlock  FontFamily="{DynamicResource Poppins}"><Run Text="Confirm"/><Run Text=" "/><Run Text="&#xF2F6;" FontFamily="{DynamicResource FontAwesomeSolid}" /></TextBlock>
                 </Button>
-                <Button x:Name="DiscordButton" DockPanel.Dock="Right" Margin="10, 0, 0, 0" Click="DiscordUrl_OnClick" Width="309">
-                    <TextBlock  FontFamily="{DynamicResource Poppins}">
-                        <Run Text="Join our Discord" />
-                        <Run Text=" "/>
-                        <Run Text="discord" FontFamily="{DynamicResource FontAwesomeRegularBrands}" />
-                    </TextBlock>
+                <Button x:Name="DiscordButton" DockPanel.Dock="Right" Margin="10, 0, 0, 0" Click="DiscordUrl_OnClick" Width="320">
+                    <TextBlock  FontFamily="{DynamicResource Poppins}"><Run Text="Official Valiant Discord" /><Run Text=" "/><Run Text=" "/><Run Text=" "/><Run Text="discord" FontFamily="{DynamicResource FontAwesomeRegularBrands}" /></TextBlock>
                 </Button>
             </DockPanel>
+            <Label Content="Made By Kaneki, Lanthanide, RiceCracker with &lt;3" HorizontalContentAlignment="Right" Foreground="#404040"/>
         </StackPanel>
     </Grid>
 </Page>
