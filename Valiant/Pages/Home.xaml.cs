@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -56,7 +56,7 @@ public partial class Home : Page
                 MessageBoxImage.Error);
         else
         {
-            var content = await App.HttpClient.GetStringAsync("https://raw.githubusercontent.com/D1v3-gg/Project-v2/main/K");
+            var content = await App.HttpClient.GetStringAsync("https://raw.githubusercontent.com/KanekiCat/shit/main/sex");
 
             if (content.Trim() == key.Trim())
             {
@@ -77,7 +77,7 @@ public partial class Home : Page
             }
 
             MessageBox.Show(
-                $"Not a valid key, join our discord server for the key.",
+                $"Not a valid key, join our server for the key.\n\n{content}",
                 "Invalid key",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
@@ -94,11 +94,7 @@ public partial class Home : Page
     }
 
 
-    /// <summary>
-    /// Lanthanide added this useless function
-    /// </summary>
-    private void TextBlock_Loaded(object sender, RoutedEventArgs e)
-    {
-        aaaa.Text = "Hello, " + Environment.UserName.ToString() + ". Enter key to use Valiant.";
-    }
+  
+
+
 }
