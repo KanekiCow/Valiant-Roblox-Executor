@@ -86,8 +86,16 @@ public partial class MainWindow : Window
         NavigationCommands.BrowseForward.InputGestures.Clear();
     }
 
-    public void CreateNotification(Notification notification) =>
+    public async void CreateNotification(Notification notification, TimeSpan? duration = null)
+    {
         Notifications.Add(notification);
+
+        if (duration != null)
+        {
+            await Task.Delay((TimeSpan)duration);
+            Notifications.Remove(notification);
+        }
+    }
 
     public static bool IsWebView2Installed() =>
         CoreWebView2Environment.GetAvailableBrowserVersionString() != null;
@@ -174,7 +182,7 @@ public partial class MainWindow : Window
                 {
                     Title = "Loaded!",
                     Description = "Valiant is loaded!"
-                });
+                }, TimeSpan.FromSeconds(5));
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
