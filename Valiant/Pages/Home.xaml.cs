@@ -41,20 +41,7 @@ public partial class Home : Page
         if (!string.IsNullOrEmpty(Properties.Settings.Default.Key))
             EnterKey(Properties.Settings.Default.Key);
 
-        DoubleAnimation animation = new DoubleAnimation();
-        animation.From = 0;
-        animation.To = 10;
-        animation.Duration = TimeSpan.FromSeconds(2);
-        animation.AutoReverse = true;
-        animation.RepeatBehavior = RepeatBehavior.Forever;
-        animation.EasingFunction = new SineEase();
-
-        Storyboard.SetTarget(animation, myImage);
-        Storyboard.SetTargetProperty(animation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
-
-        Storyboard storyboard = new Storyboard();
-        storyboard.Children.Add(animation);
-        storyboard.Begin();
+       
     }
 
     private void KeyButton_Click(object sender, RoutedEventArgs e) =>

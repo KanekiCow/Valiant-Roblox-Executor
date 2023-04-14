@@ -327,7 +327,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pages\images\key.png" />
     <Resource Include="Pages\images\backgroundn.jpg" />
     <Resource Include="Pages\images\icon.png" />
     <Resource Include="valiantlogo2.png" />

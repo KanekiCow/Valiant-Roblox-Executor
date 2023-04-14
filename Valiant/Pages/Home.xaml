@@ -13,13 +13,7 @@
     <Grid>
         
         <Image Stretch="None" Source="images/backgroundn.jpg" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-13,0,0" Height="480" Width="825" Opacity="0.35"/>
-        <Canvas>
-            <Image x:Name="myImage" Source="images/key.png" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="335,35,0,0" Height="250" Width="250" Stretch="Fill">
-                <Image.RenderTransform>
-                    <TranslateTransform X="0" Y="0"/>
-                </Image.RenderTransform>
-            </Image>
-        </Canvas>
+        <Canvas/>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Height="208" Width="296" Margin="10,70,0,0" >
             <TextBlock Margin="0,0,0,0" FontSize="25" Foreground="#3FFFFFFF" Width="272" Height="68" ><Run FontFamily="{DynamicResource Extra Bold Poppins}" Text="Welcome, Sexman69" />
 
