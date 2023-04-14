@@ -25,9 +25,6 @@
             <TextBlock HorizontalAlignment="Center" FontSize="20" Foreground="#3FFFFFFF"  FontFamily="{DynamicResource Poppins}">
                 <Run Text="Oh hi there, please enter your key to use Valiant" />
 
-            </TextBlock>
-            <TextBlock HorizontalAlignment="Center" FontSize="15" Foreground="#3FD0D0D0" Height="19"  FontFamily="{DynamicResource Poppins}">
-                <Run Text="Needs a key? Join our Discord sever below!" />
                
             </TextBlock>
             <TextBox x:Name="KeyTextBox" Margin="0, 8, 0, 0" IsEnabled="{Binding IsNotValidating}" Width="468" />
