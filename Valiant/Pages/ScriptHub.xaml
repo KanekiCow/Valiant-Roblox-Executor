@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Margin="8, 0">
-            <ComboBox x:Name="ScriptTypeComboBox" Width="125" SelectedIndex="0" VerticalAlignment="Stretch" SelectionChanged="ScriptTypeComboBox_OnSelectionChanged">
+            <ComboBox x:Name="ScriptTypeComboBox" Width="125" SelectedIndex="0" SelectionChanged="ScriptTypeComboBox_OnSelectionChanged" Height="26">
                 <ComboBoxItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="&#xf0ac;" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="10" VerticalAlignment="Center" />
@@ -34,7 +34,7 @@
                     </StackPanel>
                 </ComboBoxItem>
             </ComboBox>
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Width="83">
                 <Button x:Name="PrevButton" Content="&#xE76B;" Width="16" Height="16" Margin="2" Padding="0" FontSize="12" Click="PrevButton_OnClick" IsEnabled="{Binding IsLoaded}" Style="{DynamicResource TransparentButton}" FontFamily="{DynamicResource SegoeFluentIcons}" />
                 <TextBlock Margin="2" VerticalAlignment="Center" Foreground="{DynamicResource TextDarkBrush}">
                     <Run Text="{Binding CurrentIndex}" />
@@ -43,7 +43,7 @@
                 </TextBlock>
                 <Button x:Name="NextButton" Content="&#xE76C;" Width="16" Height="16" Margin="2" Padding="0" FontSize="12" Click="NextButton_OnClick" IsEnabled="{Binding IsLoaded}" Style="{DynamicResource TransparentButton}" FontFamily="{DynamicResource SegoeFluentIcons}" />
             </StackPanel>
-            <TextBox x:Name="FilterBox" Height="24" Margin="4" FontSize="12" Padding="0" IsEnabled="{Binding IsLoaded}" PreviewKeyDown="FilterBox_PreviewKeyDown" Foreground= "#a9aaab" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="FilterBox" Height="24" Margin="4" FontSize="12" Padding="0" IsEnabled="{Binding IsLoaded}" PreviewKeyDown="FilterBox_PreviewKeyDown" Foreground= "#a9aaab" BorderThickness="2,2,2,2" TextChanged="FilterBox_TextChanged" Width="545"/>
         </DockPanel>
 
         <ScrollViewer Grid.Row="1" Margin="4">
@@ -82,7 +82,7 @@
                                             <Button DockPanel.Dock="Right" Content="&#xf005;" FontFamily="{DynamicResource FontAwesomeRegular}" FontSize="12" Style="{DynamicResource TransparentButton}" Padding="0" Margin="8" VerticalAlignment="Top" Click="FavButton_OnClick" />
                                         </DockPanel>
 
-                                            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 0, 2, 2">
+                                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 0, 2, 2">
                                             <Button FontSize="12" Padding="4, 2" Click="ExecuteButton_OnClick">
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="&#xf04b;" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="10" VerticalAlignment="Center" />

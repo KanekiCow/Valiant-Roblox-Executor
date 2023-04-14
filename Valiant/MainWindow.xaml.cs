@@ -173,7 +173,7 @@ public partial class MainWindow : Window
                 };
 
                 UpdateStatus(
-                    text: "Loaded! Welcome to Valiant 2",
+                    text: "Loaded! Welcome to Valiant v2!",
                     progress: 0,
                     spinnerVisibility: Visibility.Hidden,
                     progressVisibility: Visibility.Hidden);

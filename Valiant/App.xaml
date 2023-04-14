@@ -11,6 +11,8 @@
 
             <!-- Fonts -->
             <FontFamily x:Key="Poppins">pack://application:,,,/Assets/Fonts/#Poppins</FontFamily>
+            <FontFamily x:Key="Extra Bold Poppins">pack://application:,,,/Assets/Fonts/#Poppins</FontFamily>
+
 
             <!-- Icon packs -->
             <FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/Assets/Fonts/SegoeFluentIcons.ttf#Segoe Fluent Icons</FontFamily>

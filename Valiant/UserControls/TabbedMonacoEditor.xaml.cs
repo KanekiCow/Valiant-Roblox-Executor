@@ -125,13 +125,14 @@ public partial class TabbedMonacoEditor : UserControl
             TabList.SelectedIndex = _previousSelectedIndex - 1 >= 0 ? _previousSelectedIndex - 1 : 0;
 
         _previousSelectedIndex = TabList.SelectedIndex;
-
+  
         var item = Items[TabList.SelectedIndex];
         var id = JsonConvert.SerializeObject(item.Id);
         var content = JsonConvert.SerializeObject(item.Content);
 
-
-        if (TabList.SelectedIndex >= 0)
+        try
+        {
+             if (TabList.SelectedIndex >= 0)
             Editor.ExecuteScriptAsync($@"
                 if (!window.monacoModels[{id}]) {{
                     window.monacoModels[{id}] = monaco.editor.createModel({content}, ""lua"")
@@ -140,6 +141,12 @@ public partial class TabbedMonacoEditor : UserControl
                 
                 editor.setModel(window.monacoModels[{id}])
             ");
+        }
+        catch
+        {
+
+        }
+       
     }
 
     private void Editor_OnCoreWebView2DOMContentLoaded(object sender, CoreWebView2DOMContentLoadedEventArgs e)
@@ -199,7 +206,7 @@ public partial class TabbedMonacoEditor : UserControl
 public class TabInfo : INotifyPropertyChanged
 {
     private string _name = "New Tab";
-    private string _content = "-- Welcome to Valiant v2";
+    private string _content = "-- Welcome to Valiant v2!";
 
     public readonly string Id = Guid.NewGuid().ToString("D");
 

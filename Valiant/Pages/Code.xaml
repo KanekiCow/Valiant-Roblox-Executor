@@ -22,51 +22,51 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0, 0, 0, 1" Padding="4, 4, 4, 8">
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0, 0, 0, 1" Padding="4, 4, 4, 4">
             <DockPanel LastChildFill="False">
-                <Button x:Name="ExecuteButton" Style="{DynamicResource TransparentButton}" Click="ExecuteButton_Click">
-                    <TextBlock>
+                <Button x:Name="ExecuteButton" Style="{DynamicResource TransparentButton}" Click="ExecuteButton_Click" >
+                    <TextBlock >
                         
-                        <Run Text="play" FontFamily="{DynamicResource FontAwesomeSolid}" Foreground="Green" FontSize="12" />
+                        <Run Text="play" Foreground="#FF4B6DF7" FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="12" />
                             
                        
                         <Run Text=" Execute" />
 
                     </TextBlock>
-                    
+
                 </Button>
 
                 <Button x:Name="ClearButton" Style="{DynamicResource TransparentButton}" Click="ClearButton_OnClick">
                     <TextBlock>
-                        <Run Text="eraser" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="12" Foreground="#FFCA2A2A" />
+                        <Run Text="eraser"  FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="12" Foreground="#FFED4242"  />
                         <Run Text=" Clear" />
                     </TextBlock>
                 </Button>
 
                 <Button x:Name="SaveButton" Style="{DynamicResource TransparentButton}" Click="SaveButton_OnClick">
                     <TextBlock>
-                        <Run Text="save" FontFamily="{DynamicResource FontAwesomeSolid}" Foreground="MediumPurple" FontSize="12" />
+                        <Run Text="save" Foreground="#FF4AB12E" FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="12" />
                         <Run Text=" Save" />
                     </TextBlock>
                 </Button>
 
                 <Button x:Name="LoadButton" Style="{DynamicResource TransparentButton}" Click="LoadButton_OnClick">
                     <TextBlock>
-                        <Run Text="folder" FontFamily="{DynamicResource FontAwesomeSolid}" Foreground="Orange" FontSize="12" />
+                        <Run Text="folder" Foreground="#FFE49400" FontFamily="{DynamicResource FontAwesomeSolid}"  FontSize="12" />
                         <Run Text=" Load" />
                     </TextBlock>
                 </Button>
 
                 <Button x:Name="InjectButton" DockPanel.Dock="Right" Style="{DynamicResource TransparentButton}" Click="InjectButton_Click">
                     <TextBlock>
-                        <Run Text="syringe" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="12" Foreground="#FF5252E6" />
+                        <Run Text="syringe" Foreground="#FF7D26A0" FontFamily="{DynamicResource FontAwesomeSolid}" FontSize="12"  />
                         <Run Text=" Inject" />
                     </TextBlock>
                 </Button>
             </DockPanel>
         </Border>
 
-        <TreeView x:Name="Tree" Background="Transparent" BorderThickness="0, 8, 1, 0" BorderBrush="{DynamicResource ControlLightestBrush}" Grid.Column="0" Grid.Row="1" />
+        <TreeView x:Name="Tree" Background="{DynamicResource ControlLightestBrush}" BorderThickness="0, 8, 1, 0" BorderBrush="{DynamicResource ControlLightestBrush}" Grid.Column="0" Grid.Row="1" />
         <userControls:TabbedMonacoEditor x:Name="Editor" Panel.ZIndex="10" Grid.Column="1" Grid.Row="1" Margin="4, 8, 0, 0" SnapsToDevicePixels="True" />
     </Grid>
 </Page>

@@ -10,7 +10,7 @@
         xmlns:wb="clr-namespace:Valiant.Classes"
         wb:WindowBlur.IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=Blur, Mode=OneTime}"
         mc:Ignorable="d"
-        Title="Valiant" Height="400" Width="700" MinHeight="400" MinWidth="650"
+        Title="Valiant" Height="390" Width="650"  MinHeight="365" MinWidth="600" 
         WindowStyle="None"
         AllowsTransparency="True"
         StateChanged="MainWindow_OnStateChanged"
@@ -162,7 +162,7 @@
                         <GradientStop Color="#0a0314" Offset="1"/>
                     </RadialGradientBrush>
                 </Border.Background>
-              
+
 
                 <Image
                 x:Name="WallpaperImage"
@@ -190,9 +190,9 @@
                     <RowDefinition Height="24" />
                 </Grid.RowDefinitions>
 
-                <Border x:Name="TitleBorder" Panel.ZIndex="2" Grid.Row="0" MouseDown="TitleBorder_OnMouseDown" Background="Transparent" Margin="0,0,0,10">
-                    <DockPanel LastChildFill="False" Margin="0,0,0,10">
-                        <Image Source="Assets/Images/icon.png" Width="35" Height="35" Margin="3, 0" />
+                <Border x:Name="TitleBorder" Panel.ZIndex="2" Grid.Row="0" MouseDown="TitleBorder_OnMouseDown" Margin="0,0,0,20" Background="{DynamicResource ControlLighterBrush}" >
+                    <DockPanel LastChildFill="False" Margin="0,0,0,0">
+                        <Image Source="Assets/Images/icon.png" Width="35" Height="35" Margin="5, 0" />
 
                         <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Margin="5, 3">
                             <userControls:PageRadioButton x:Name="HomePageButton" Style="{DynamicResource NavigationRadioButtonStyle}" Checked="PageButton_OnChecked" >
@@ -224,14 +224,14 @@
                             </userControls:PageRadioButton>
                         </StackPanel>
                         <Viewbox></Viewbox>
-                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Width="133">
-                            <Button x:Name="MinimizeButton" Content="&#xe921;" FontSize="12" Padding="0" FontFamily="{DynamicResource SegoeFluentIcons}" Width="32" Height="32" Margin="8, 4" Style="{DynamicResource TransparentButton}" Click="MinimizeButton_OnClick" Foreground="#FF676767" >
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Width="122" Height="32">
+                            <Button x:Name="MinimizeButton" Content="&#xE921;" FontSize="12" Padding="0" FontFamily="{DynamicResource SegoeFluentIcons}" Width="32" Height="32" Style="{DynamicResource TransparentButton}" Click="MinimizeButton_OnClick" Foreground="#FF676767" >
                                 <Button.Effect>
                                     <DropShadowEffect BlurRadius="5" ShadowDepth="0" Opacity="1" 
                       Color="Black" Direction="20"/>
                                 </Button.Effect>
                             </Button>
-                            <Button x:Name="MaximizeButton" Content="&#xe922;" FontSize="12" Padding="0" FontFamily="{DynamicResource SegoeFluentIcons}" Width="32" Height="32" Style="{DynamicResource TransparentButton}" Click="MaximizeButton_OnClick" Foreground="#FF676767">
+                            <Button x:Name="MaximizeButton" Content="&#xE922;" FontSize="12" Padding="0" FontFamily="{DynamicResource SegoeFluentIcons}" Width="32" Height="32" Style="{DynamicResource TransparentButton}" Click="MaximizeButton_OnClick" Foreground="#FF676767">
 
                                 <Button.Effect>
                                     <DropShadowEffect BlurRadius="5" ShadowDepth="0" Opacity="1" 
@@ -266,7 +266,7 @@
                     </DockPanel>
                 </Border>
 
-                <Frame x:Name="PageFrame" Grid.Row="1" NavigationUIVisibility="Hidden" SnapsToDevicePixels="True" />
+                <Frame x:Name="PageFrame" NavigationUIVisibility="Hidden" SnapsToDevicePixels="True" Margin="0,43,0,0" Grid.RowSpan="2" />
 
                 <ItemsControl Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="250" ItemsSource="{Binding Notifications}">
                     <ItemsControl.ItemsPanel>

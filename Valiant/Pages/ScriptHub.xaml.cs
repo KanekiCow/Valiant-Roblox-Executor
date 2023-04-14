@@ -23,6 +23,11 @@ using Valiant.Properties;
 using Valiant.UserControls;
 
 namespace Valiant.Pages;
+public class Notification
+{
+    public string Title { get; set; }
+    public string Description { get; set; }
+}
 
 /// <summary>
 /// Interaction logic for ScriptHub.xaml
@@ -57,12 +62,14 @@ public partial class ScriptHub : Page
     }
 
     public ObservableCollection<string> Favorites { get; set; }
-
+    public ObservableCollection<Notification> Notifications { get; }
     // Singleton
     public static ScriptHub Instance { get; private set; }
 
     public ScriptHub()
     {
+        Notifications = new ObservableCollection<Notification>();
+
         InitializeComponent();
         Favorites = new ObservableCollection<string>(Properties.Settings.Default.Favorites);
         Favorites.CollectionChanged += (_, _) =>
@@ -148,9 +155,7 @@ public partial class ScriptHub : Page
 
         catch
         {
-            ScriptControl.ItemsSource = null;
-            MainWindow.Instance.ScriptHubRadioButton.IsEnabled = false;
-            MessageBox.Show("There seems to be a problem with our cloud provider. Script hub is temporary disabled.");
+          
         }
 
         finally
@@ -227,20 +232,39 @@ public partial class ScriptHub : Page
         if (FilterBox != null)
             ScriptHubLoad(page: 1, query: FilterBox.Text);
     }
+    private async void CreateNotification(Notification notification, TimeSpan duration)
+    {
+        Notifications.Add(notification);
+
+        if (duration != null)
+        {
+            await Task.Delay((TimeSpan)duration);
+            Notifications.Remove(notification);
+        }
+    } 
 
     private void FavButton_OnClick(object sender, RoutedEventArgs e)
     {
         var item = (Script)((Button)sender).DataContext;
         if (Favorites.Contains(item.Id))
         {
+           
             Favorites.Remove(item.Id);
-            MessageBox.Show("removed script");
+            MessageBox.Show("Script has been added from removed tab!");
+
         }
         else
         {
             Favorites.Add(item.Id);
-            MessageBox.Show("added script");
+            MessageBox.Show("Script has been removed from favorite tab!");
         }
+    }
+
+
+
+    private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
     }
 }
 
