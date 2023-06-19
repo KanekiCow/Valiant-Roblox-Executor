@@ -32,7 +32,6 @@ public partial class Code : Page
     {
         InitializeComponent();
         InitializeTree("./scripts");
-
         Instance = this;
     }
 
